@@ -13,6 +13,11 @@ metadata:
   annotations:
 {{ toYaml . | indent 4 }}
   {{- end }}
+  {{- with .Values.persistence.finalizers  }}
+  finalizers:
+    - kubernetes.io/pvc-protection
+{{ toYaml . | indent 4 }}
+  {{- end }}
 spec:
   accessModes:
     {{- range .Values.persistence.accessModes }}
